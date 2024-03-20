@@ -13,25 +13,19 @@ def get_upcoming_birthdays(users: list) -> tuple:
         res = birthday.timetuple().tm_yday - today.timetuple().tm_yday
 
         if birthday.weekday() >= 5:
-            birthday += timedelta(days=2) if birthday.weekday() == 5 else timedelta(days=1)
+            birthday += timedelta(days=7-birthday.weekday())
 
         if res in range(0, 7):
             upcoming_birthdays.append({
                 'name': name,
                 'congratulating_date': datetime.strftime(birthday, '%Y.%m.%d')
             })
-
-        elif res > 7:
-            birthdays.append({
-                'name': name,
-                'congratulating_date': datetime.strftime(birthday, '%Y.%m.%d')
-            })
-
+            
         else:
             birthdays.append({
                 'name': name,
-                'congratulating_date': datetime.strftime(birthday.replace(year=birthday.year + 1), '%Y.%m.%d')
+                'congratulating_date': datetime.strftime(birthday.replace(year=birthday.year + 0 if res > 7 else birthday.year + 1), '%Y.%m.%d')
             })
 
     return upcoming_birthdays, birthdays
-
+    
