@@ -3,14 +3,41 @@ from classes import *
 
 def main():
     book = AddressBook()
+    print("Welcome to the assistant bot!")
+    while True:
+        user_input = input("Enter a command: ")
+        command, *args = parse_input(user_input)
 
-    john_record = Record("John")
-    john_record.add_phone("1234567890")
-    john_record.add_birthday("24.03.2000")
+        if command in ["close", "exit"]:
+            print("Good bye!")
+            break
 
-    book.add_record(john_record)
+        elif command == "hello":
+            print("How can I help you?")
 
-    book.get_upcoming_birthdays()
+        elif command == "add":
+            # реалізація
+
+        elif command == "change":
+            # реалізація
+
+        elif command == "phone":
+            # реалізація
+
+        elif command == "all":
+            # реалізація
+
+        elif command == "add-birthday":
+            # реалізація
+
+        elif command == "show-birthday":
+            # реалізація
+
+        elif command == "birthdays":
+            # реалізація
+
+        else:
+            print("Invalid command.")
 
 
 if __name__ == '__main__':
