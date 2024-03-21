@@ -66,7 +66,7 @@ class Record:
 
 class AddressBook(UserDict):
     def add_record(self, record):
-        if not isinstance(record, Record):
+        if type(record) != Record:
             raise ValueError
         self.data[record.name.value] = record
 
