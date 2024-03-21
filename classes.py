@@ -1,6 +1,7 @@
 from collections import UserDict
 from datetime import datetime
 from upcoming_birthdays import get_upcoming_birthdays
+from decorators import input_error
 
 
 class Field:
@@ -51,14 +52,16 @@ class Record:
     def remove_phone(self, phone):
         self.phones.remove(self.__find_phone(phone))
 
-    def add_birthday(self, birthday):
-        self.birthday = Birthday(birthday)
-
     def __find_phone(self, phone):
         for number in self.phones:
             if number.value == phone:
                 return number
         raise ValueError
+
+    @input_error
+    def add_birthday(self, birthday):
+        self.birthday = Birthday(birthday)
+        return f'{self.name}\'s birthday has been added'
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
