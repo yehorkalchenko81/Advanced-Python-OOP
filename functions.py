@@ -1,4 +1,4 @@
-from classes import Record, Phone
+from classes import Record
 from decorators import input_error
 from upcoming_birthdays import get_upcoming_birthdays
 
@@ -7,6 +7,7 @@ from upcoming_birthdays import get_upcoming_birthdays
 def command_add(args, book):
     name, phone, *_ = args
 
+    contact = Record(name)
     contact.add_phone(phone)
     book.add_record(contact)
 
@@ -29,7 +30,7 @@ def command_phone(args, book):
     
     contact = book.find(name)
 
-    return f'{name}\'s phones:\n\t' + '\n\t'.join(contact.phones)
+    return f'{name}\'s phones:\n\t' + '\n\t'.join([num.value for num in contact.phones])
 
 
 @input_error
@@ -47,7 +48,6 @@ def command_add_birthday(args, book):
     return f'{name}\'s birth day has been updated!'
 
 
-
 @input_error
 def command_show_birthday(args, book):
     name, *_ = args
@@ -56,7 +56,7 @@ def command_show_birthday(args, book):
     birthday = contact.birthday
 
     if birthday:
-        return f'{name}\'s birthday - {birthday.strftime('%d.%m.%Y')}'
+        return f'{name}\'s birthday - {birthday.value.strftime('%d.%m.%Y')}'
     else:
         return f'{name}\'s birthday has not been found!'
     
