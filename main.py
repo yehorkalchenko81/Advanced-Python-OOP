@@ -17,7 +17,7 @@ def main():
             print("How can I help you?")
 
         elif command == "add":
-            # реалізація
+            command_add(args)
 
         elif command == "change":
             # реалізація
