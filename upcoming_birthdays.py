@@ -1,31 +1,27 @@
 from datetime import datetime, timedelta
 
 
-def get_upcoming_birthdays(users: list) -> tuple:
-    upcoming_birthdays, birthdays = [], []
-
+def get_upcoming_birthdays(users: list) -> list:
+    upcoming_birthdays = []
     today = datetime.today()
 
     for user in users:
-        name, date_of_birth = list(user.values())
-        date_time_bd = datetime.strptime(date_of_birth, '%Y.%m.%d')
-        birthday = datetime(year=today.year, month=date_time_bd.month, day=date_time_bd.day)
-        res = birthday.timetuple().tm_yday - today.timetuple().tm_yday
+        name, date_of_birth = [i for i in user.items()][0]
+        birthday = datetime(year=today.year,
+                            month=date_of_birth.value.month,
+                            day=date_of_birth.value.day)
 
         if birthday.weekday() >= 5:
             birthday += timedelta(days=7-birthday.weekday())
 
-        if res in range(0, 7):
+        if birthday.timetuple().tm_yday - today.timetuple().tm_yday in range(0, 7):
             upcoming_birthdays.append({
                 'name': name,
-                'congratulating_date': datetime.strftime(birthday, '%Y.%m.%d')
-            })
-            
-        else:
-            birthdays.append({
-                'name': name,
-                'congratulating_date': datetime.strftime(birthday.replace(year=birthday.year + 0 if res > 7 else birthday.year + 1), '%Y.%m.%d')
+                'congratulating_date': datetime.strftime(birthday, '%d.%m.%Y'),
             })
 
-    return upcoming_birthdays, birthdays
-    
+    return upcoming_birthdays
+
+
+if __name__ == '__main__':
+    print(*get_upcoming_birthdays([{'name': 'Yehor', 'congratulating_date': '24.03.2000'}]))

@@ -1,5 +1,6 @@
 from collections import UserDict
 from datetime import datetime
+from upcoming_birthdays import get_upcoming_birthdays
 
 
 class Field:
@@ -27,7 +28,7 @@ class Phone(Field):
 class Birthday(Field):
     def __init__(self, value):
         try:
-            Field.__init__(self, datetime.strptime(value, "%d.%m.%Y"))
+            Field.__init__(self, datetime.strptime(value, "%d.%m.%Y").date())
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
 
@@ -81,3 +82,6 @@ class AddressBook(UserDict):
         if result is None:
             raise KeyError
         return result
+
+    def get_upcoming_birthdays(self):
+        print(*get_upcoming_birthdays([{key: value.birthday} for key, value in self.data.items()]))
