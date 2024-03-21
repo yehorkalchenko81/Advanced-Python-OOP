@@ -2,21 +2,10 @@ from classes import Record, Phone
 from decorators import input_error
 from upcoming_birthdays import get_upcoming_birthdays
 
-NOT_ENOUGH_VAL_MESSAGE = 'Not enough values for this commad!'
-NOT_FOUND_CONT_MESSAGE = 'Contact has not been found!'
-
 
 @input_error
 def command_add(args, book):
-    if len(args) < 2:
-        return f'{NOT_ENOUGH_VAL_MESSAGE}\nSyntax: add [name] [phone]'
-    
     name, phone, *_ = args
-
-    if name in book:
-        contact = book.find(name)
-    else:
-        contact = Record(name)
 
     contact.add_phone(phone)
     book.add_record(contact)
@@ -26,13 +15,7 @@ def command_add(args, book):
 
 @input_error
 def command_change(args, book):
-    if len(args) < 3:
-        return f'{NOT_ENOUGH_VAL_MESSAGE}\nSyntax: change [name] [old-phone] [new-phone]'
-    
     name, old_phone, phone, *_ = args
-
-    if name not in book:
-        return NOT_FOUND_CONT_MESSAGE
     
     contact = book.find(name)
     contact.edit_phone(old_phone, phone)
@@ -42,13 +25,7 @@ def command_change(args, book):
 
 @input_error
 def command_phone(args, book):
-    if len(args) < 1:
-        return f'{NOT_ENOUGH_VAL_MESSAGE}\nSyntax: phone [name]'
-    
     name, *_ = args
-
-    if name not in book:
-        return NOT_FOUND_CONT_MESSAGE
     
     contact = book.find(name)
 
@@ -62,13 +39,7 @@ def command_all(book):
 
 @input_error
 def command_add_birthday(args, book):
-    if len(args) < 2:
-        return f'{NOT_ENOUGH_VAL_MESSAGE}\nSyntax: add-birthday [name] [date-of-birth(DD.MM.YYYY)]'
-    
     name, date_of_birth, *_ = args
-
-    if name not in book:
-        return NOT_FOUND_CONT_MESSAGE
     
     contact = book.find(name)
     contact.add_birthday(date_of_birth)
@@ -79,13 +50,7 @@ def command_add_birthday(args, book):
 
 @input_error
 def command_show_birthday(args, book):
-    if len(args) < 1:
-        return f'{NOT_ENOUGH_VAL_MESSAGE}\nSyntax: show-birthday [name]'
-    
     name, *_ = args
-
-    if name not in book:
-        return NOT_FOUND_CONT_MESSAGE
     
     contact = book.find(name)
     birthday = contact.birthday
