@@ -1,6 +1,6 @@
 from classes import AddressBook
 from parsing import parse_input
-from functions import command_add
+from functions import command_add, command_change
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
             print(command_add(args, book))
 
         elif command == "change":
-            # реалізація
+            print(command_change(args, book))
 
         elif command == "phone":
             # реалізація

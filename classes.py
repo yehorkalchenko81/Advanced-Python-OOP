@@ -55,7 +55,6 @@ class Record:
                 return number
         raise ValueError
 
-    @input_error
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
         return f'{self.name}\'s birthday has been added'
@@ -80,7 +79,7 @@ class AddressBook(UserDict):
     def __find(self, name):
         result = self.data.get(name, None)
         if result is None:
-            raise KeyError
+            raise ValueError
         return result
 
     def get_upcoming_birthdays(self):
