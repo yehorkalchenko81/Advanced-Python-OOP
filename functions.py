@@ -1,6 +1,8 @@
 from classes import Record
+from decorators import input_error
 
 
+@input_error
 def command_add(args, book):
     if len(args) < 2:
         return 'Not enough values for this commad!'
