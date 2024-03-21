@@ -1,5 +1,6 @@
-from classes import *
+from classes import AddressBook
 from parsing import parse_input
+from functions import command_add
 
 
 def main():
@@ -17,7 +18,7 @@ def main():
             print("How can I help you?")
 
         elif command == "add":
-            command_add(args)
+            print(command_add(args, book))
 
         elif command == "change":
             # реалізація
