@@ -63,7 +63,6 @@ def command_show_birthday(args, book):
         return f'{name}\'s birthday has not been found!'
     
 
-@input_error
 def birthdays(book):
     birthday_list = [{'name': name, 'congratulating_date': book.find(name).birthday} for name in book]
 
