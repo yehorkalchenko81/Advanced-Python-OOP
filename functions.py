@@ -6,8 +6,10 @@ from upcoming_birthdays import get_upcoming_birthdays
 @input_error
 def command_add(args, book):
     name, phone, *_ = args
-
-    contact = Record(name)
+    if name in book:
+        contact = book.find(name)
+    else: 
+        contact = Record(name)
     contact.add_phone(phone)
     book.add_record(contact)
 
