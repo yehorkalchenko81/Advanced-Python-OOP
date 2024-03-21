@@ -35,7 +35,6 @@ def command_phone(args, book):
     return f'{name}\'s phones:\n\t' + '\n\t'.join([num.value for num in contact.phones])
 
 
-@input_error
 def command_all(book):
     return 'All Contacts:\n\t' + '\n\t'.join(book.keys())
 
