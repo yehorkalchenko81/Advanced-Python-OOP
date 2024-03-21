@@ -1,5 +1,6 @@
 from classes import Record, Phone
 from decorators import input_error
+from upcoming_birthdays import get_upcoming_birthdays
 
 NOT_ENOUGH_VAL_MESSAGE = 'Not enough values for this commad!'
 NOT_FOUND_CONT_MESSAGE = 'Contact has not been found!'
@@ -85,3 +86,18 @@ def command_show_birthday(args, book):
 
     if name not in book:
         return NOT_FOUND_CONT_MESSAGE
+    
+    contact = book.find(name)
+    birthday = contact.birthday
+
+    if birthday:
+        return f'{name}\'s birthday - {birthday.strftime('%d.%m.%Y')}'
+    else:
+        return f'{name}\'s birthday has not been found!'
+    
+
+@input_error
+def birthdays(book):
+    birthday_list = [{'name': name, 'congratulating_date': book.find(name).birthday} for name in book]
+
+    return 'Upcoming birthdays:\n\t' + '\n\t'.join([f'{dc['name']}: {dc['congratulating_date']}' for dc in get_upcoming_birthdays(birthday_list)])

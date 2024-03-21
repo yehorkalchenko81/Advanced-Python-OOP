@@ -1,6 +1,6 @@
 from classes import AddressBook
 from parsing import parse_input
-from functions import command_add, command_change, command_phone, command_all, command_add_birthday
+from functions import command_add, command_change, command_phone, command_all, command_add_birthday, command_show_birthday
 
 
 def main():
@@ -33,10 +33,10 @@ def main():
             print(command_add_birthday())
 
         elif command == "show-birthday":
-            pass
+            print(command_show_birthday(args, book))
 
         elif command == "birthdays":
-            pass
+            print(birthdays(book))
 
         else:
             print("Invalid command!")
