@@ -1,7 +1,6 @@
 from collections import UserDict
 from datetime import datetime
 from upcoming_birthdays import get_upcoming_birthdays
-from decorators import input_error
 
 
 class Field:
