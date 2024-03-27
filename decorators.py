@@ -6,4 +6,5 @@ def input_error(func):
             return 'Wrong Input!'
         except Exception as e:
             return e
+
     return inner
